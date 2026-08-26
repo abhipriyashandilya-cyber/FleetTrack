@@ -179,8 +179,8 @@ DB_NAME=fleettrack_sql
    MongoDB Connected for Seeding...
    ✅ Admin user created/reset successfully!
    -----------------------------------
-    Email:    admin@fleettrack.com
-    Password: Admin@123
+    Email:    manager@fleettrack.com
+    Password: Manager@123
    -----------------------------------
    ```
 
