@@ -1,88 +1,68 @@
-# SecureTask / FleetTrack — Project Progress
+# FleetTrack Enterprise — Implementation & Milestone Progress
 
-## 🎯 Overall Project Status
-
-**Current Stage:** Milestone 6 Complete — Trips & Dispatch Module Operational ✅
+## Project Overview
+FleetTrack Enterprise is a commercial fleet management platform built using a hybrid database architecture (MongoDB + MariaDB/MySQL), Express.js backend, and a React 18 frontend.
 
 ---
 
-# Milestone Progress Summary
+## Completed Milestones
 
-```text
-Milestone 1  ✅ GitHub + Architecture Setup
-Milestone 2  ✅ Node.js + Express + MongoDB Atlas
-Milestone 3  ✅ Auth + JWT + Role-Based Access Control (RBAC)
-Milestone 4  ✅ Vehicles Module
-Milestone 5  ✅ Drivers Module
-Milestone 6  ✅ Trips & Dispatch Module
-Milestone 7  ⏳ Maintenance Module
-Milestone 8  ⏳ Fuel & Expenses (MariaDB / MySQL)
-Milestone 9  ⏳ Assets + Documents Management
-Milestone 10 ⏳ React Dashboard
-Milestone 11 ⏳ MongoDB + MySQL Query Optimization
-Milestone 12 ⏳ Testing + Security + CI/CD
+### Milestone 1: Project Initialization & Repository Setup
+- Setup repository structure (`backend/` and `frontend/`).
+- Initialized Node.js environment with Express, Mongoose, and CORS middleware.
+- Created React application with Vite, Tailwind CSS, and Lucide icons.
+- Configured Git branches (`main` and `develop`).
 
-Milestone Details
-Milestone 1 — GitHub + Architecture Setup
-Status: ✅ Completed
+### Milestone 2: Authentication & RBAC Core
+- Created Mongoose `User` model with password hashing via `bcryptjs`.
+- Implemented JWT generation and authorization middleware.
+- Built Role-Based Access Control (`Admin`, `Manager`, `Driver`) for API endpoints.
+- Developed React `AuthContext` with login/logout persistence.
 
-Initialized local repository and set up dual branch structure (main, develop).
+### Milestone 3: Fleet Asset Management (Vehicles API)
+- Designed `Vehicle` schema (`VIN`, `Make`, `Model`, `Year`, `Status`, `FuelType`).
+- Implemented full CRUD endpoints (`GET`, `POST`, `PUT`, `DELETE`).
+- Built interactive vehicle roster view in React with real-time status badges.
 
-Configured monorepo structure (backend/, frontend/, docs/, .github/).
+### Milestone 4: Driver Roster & Compliance Tracking
+- Created `Driver` schema with CDL tracking and safety scoring.
+- Implemented CDL license expiration alert system.
+- Connected driver assignments to active vehicle assets.
 
-Added .gitignore and backend/.env.example.
+### Milestone 5: Trip Dispatch & GPS Telemetry
+- Developed `Trip` model for managing origin, destination, and mileage logs.
+- Built trip dispatch form and status tracker (`Pending`, `In-Transit`, `Completed`).
+- Linked trip dispatch lifecycle directly to driver profiles.
 
-Milestone 2 — Express Backend + MongoDB Atlas
-Status: ✅ Completed
+### Milestone 6: Preventative Maintenance & Cost Reporting
+- Designed `Maintenance` model for service schedules and repair costs.
+- Built cost aggregator for vehicle repair history.
+- Integrated status updates between maintenance records and vehicle availability.
 
-Created Node.js + Express backend application (server.js, app.js).
+### Milestone 7: Relational Analytics (MariaDB/MySQL Integration)
+- Integrated `mysql2/promise` connection pool for relational financial telemetry.
+- Created fuel consumption logs and transactional data schemas.
+- Implemented dual-database query handling in backend controllers.
 
-Established async connection to MongoDB Atlas (config/db.js).
+### Milestone 8: Performance Optimization & Indexing
+- Applied MongoDB compound indexes for optimized vehicle and driver queries.
+- Created SQL indexes (`idx_fuel_vin_date`) for fast analytics reporting.
+- Standardized custom query pagination middleware (`page`, `limit`).
 
-Configured environment variables and health check endpoint (/api/health).
+### Milestone 9: Frontend UI Polish & Real-Time Feedback
+- Designed dynamic dashboard metrics (Active Vehicles, Pending Maintenance, Driver Alerts).
+- Implemented Axios interceptors for global JWT token passing and error handling.
+- Optimized UI layout with responsive sidebars and data tables.
 
-Milestone 3 — Authentication + JWT + RBAC
-Status: ✅ Completed
+### Milestone 10: System Integration & End-to-End Testing
+- Tested full workflow from driver assignment to trip creation and fuel logging.
+- Verified route protection and RBAC permission barriers across all UI pages.
+- Tested edge cases for failed authentication and invalid payload inputs.
 
-Created User schema supporting admin, manager, and driver roles.
+### Milestone 11: Seeding & Environment Standardisation
+- Created robust `seed.js` script for automatic admin initialization (`admin@fleettrack.com`).
+- Standardized local `.env` configuration file to prevent IPv6 (`127.0.0.1`) connection issues.
 
-Implemented automatic password hashing via bcryptjs pre-save hooks.
-
-Implemented JWT issuance (generateToken.js) and protection middleware (auth.js).
-
-Verified user registration, login, and /api/auth/me endpoints in Postman.
-
-Milestone 4 — Vehicles Module
-Status: ✅ Completed
-
-Created Vehicle model with fields: vin, make, model, year, licensePlate, status, assignedDriver, fuelType, odometerMiles.
-
-Added compound index { status: 1, assignedDriver: 1 } for active fleet lookups.
-
-Implemented vehicle CRUD operations and driver assignment endpoint (/api/vehicles/:id/assign-driver).
-
-Verified end-to-end driver assignment with populated relations in Postman.
-
-Milestone 5 — Drivers Module
-Status: ✅ Completed
-
-Created DriverProfile model linked to User for CDL tracking, license expiry, and safety ratings.
-
-Built driver roster API aggregating driver profile data and assigned vehicle details.
-
-Implemented status tracking (available, on-trip, suspended, off-duty).
-
-Verified profile upserts and availability status updates in Postman.
-
-Milestone 6 — Trips & Dispatch Module
-Status: ✅ Completed
-
-Created Trip schema with fields: tripNumber, vehicle, driver, origin, destination, scheduledDate, cargo, status, startTime, endTime.
-
-Implemented trip dispatch lifecycle state transitions (scheduled → in-transit → completed).
-
-Automated operational side-effects: updating vehicle status (in-service) and driver status (on-trip) upon dispatch.
-
-Verified TRIP-0001 creation and status lifecycle execution using Postman.
-
-Next Milestone: Milestone 7 — Maintenance Module 🛠️
+### Milestone 12: Local Setup Documentation & Cleanup
+- Cleaned up Docker dependencies in favor of a fast local Node.js + MongoDB development environment.
+- Documented complete architecture, setup steps, and API routes in `README.md`.
